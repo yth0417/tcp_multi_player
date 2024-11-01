@@ -29,7 +29,7 @@ export const createPingPacket = (timestamp) => {
   const ping = protoMessages.common.Ping;
 
   const payload = { timestamp };
-  const message = Location.create(payload);
-  const PingPacket = Location.encode(message).finish();
-  return serializer(PingPacket, PACKET_TYPE.PING);
+  const message = ping.create(payload);
+  const pingPacket = ping.encode(message).finish();
+  return serializer(pingPacket, PACKET_TYPE.PING);
 };

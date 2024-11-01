@@ -1,4 +1,3 @@
-import User from '../classes/models/user.class.js';
 import { updateUserLocation } from '../db/user/user.db.js';
 import { userSessions } from './sessions.js';
 
@@ -14,6 +13,15 @@ export const removeUser = async (socket) => {
     await updateUserLocation(user.x, user.y, user.id);
     return userSessions.splice(index, 1)[0];
   }
+};
+
+export const getUserBySocket = (socket) => {
+  const user = userSessions.find((user) => user.socket === socket);
+  if (!user) {
+    // TODO
+    console.error('유저를 찾을 수 없습니다. : getUserBySocket');
+  }
+  return user;
 };
 
 export const getAllUser = (socket) => {
